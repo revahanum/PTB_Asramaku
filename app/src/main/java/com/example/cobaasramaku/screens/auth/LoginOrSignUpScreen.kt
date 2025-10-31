@@ -2,7 +2,6 @@ package com.example.cobaasramaku.screens.auth
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -18,12 +17,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cobaasramaku.R
 import com.example.cobaasramaku.ui.theme.BackgroundColor
-import com.example.cobaasramaku.ui.theme.LightTeal
 import com.example.cobaasramaku.ui.theme.PrimaryTeal
+import com.example.cobaasramaku.ui.theme.LightTeal
 
 @Composable
-fun LandingScreen(
-    onNavigateToLoginOrSignUp: () -> Unit
+fun LoginOrSignUpScreen(
+    onNavigateToLogin: () -> Unit,
+    onNavigateToSignUp: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -46,10 +46,30 @@ fun LandingScreen(
                     .clip(CircleShape)
             )
 
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(80.dp))
 
             Button(
-                onClick = onNavigateToLoginOrSignUp,
+                onClick = onNavigateToLogin,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = PrimaryTeal,
+                    contentColor = Color.White
+            ),
+                shape = RoundedCornerShape(12.dp)
+            ) {
+                Text(
+                    text = "LOGIN",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Button(
+                onClick = onNavigateToSignUp,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp),
@@ -60,9 +80,9 @@ fun LandingScreen(
                 shape = RoundedCornerShape(12.dp)
             ){
                 Text(
-                    text = "Get Started",
+                    text = "SIGN UP",
                     fontSize = 16.sp,
-                    fontWeight = FontWeight.Medium
+                    fontWeight = FontWeight.Bold
                 )
             }
         }

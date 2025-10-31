@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.dp
 import com.example.cobaasramaku.R
 import com.example.cobaasramaku.ui.theme.BackgroundColor
-import com.example.cobaasramaku.ui.theme.ButtonTeal
+import com.example.cobaasramaku.ui.theme.LightTeal
 import com.example.cobaasramaku.ui.theme.PrimaryTeal
 
 @Composable
@@ -38,6 +38,9 @@ fun LoginScreen(
     var email by remember {mutableStateOf("")}
     var password by remember {mutableStateOf("")}
     var passwordVisible by remember {mutableStateOf(false)}
+
+    var emailError by remember { mutableStateOf(false) }
+    var passwordError by remember { mutableStateOf(false) }
 
     Box(
         modifier = Modifier
@@ -64,7 +67,10 @@ fun LoginScreen(
 
             OutlinedTextField(
                 value = email,
-                onValueChange = {email = it},
+                onValueChange = {
+                    email = it
+                    emailError = false
+                },
                 label = {Text("Email")},
                 modifier = Modifier.fillMaxWidth(),
                 colors = OutlinedTextFieldDefaults.colors(
@@ -72,17 +78,24 @@ fun LoginScreen(
                     unfocusedBorderColor = PrimaryTeal.copy(alpha = 0.5f),
                     focusedLabelColor = PrimaryTeal,
                     unfocusedLabelColor = PrimaryTeal.copy(alpha = 0.7f),
-                    cursorColor = PrimaryTeal
+                    cursorColor = PrimaryTeal,
+                    errorBorderColor = Color.Red
                 ),
                 shape = RoundedCornerShape(12.dp),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
             )
+            if (emailError){
+                Text("Email tidak boleh kosong!", color = Color.Red, fontSize = 12.sp)
+            }
 
             Spacer(modifier = Modifier.height(16.dp))
 
             OutlinedTextField(
                 value = password,
-                onValueChange = {password = it},
+                onValueChange = {
+                    password = it
+                    passwordError = false
+                },
                 label = {Text("Password")},
                 modifier = Modifier.fillMaxWidth(),
                 visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
@@ -100,11 +113,15 @@ fun LoginScreen(
                     unfocusedBorderColor = PrimaryTeal.copy(alpha = 0.5f),
                     focusedLabelColor = PrimaryTeal,
                     unfocusedLabelColor = PrimaryTeal.copy(alpha = 0.7f),
-                    cursorColor = PrimaryTeal
+                    cursorColor = PrimaryTeal,
+                    errorBorderColor = Color.Red
                 ),
                 shape = RoundedCornerShape(12.dp),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
             )
+            if (passwordError){
+                Text("Password tidak boleh kosong!", color = Color.Red, fontSize = 12.sp)
+            }
 
             Spacer(modifier = Modifier.height(8.dp))
 
@@ -118,7 +135,21 @@ fun LoginScreen(
             Spacer(modifier = Modifier.height(24.dp))
 
             Button(
-                onClick = onLoginSuccess,
+                onClick = {
+                    var valid = true
+
+                    if (email.isBlank()){
+                        emailError = true
+                        valid = false
+                    }
+                    if (password.isBlank()){
+                        passwordError = true
+                        valid = false
+                    }
+                    if (valid){
+                        onLoginSuccess()
+                    }
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp),
@@ -143,7 +174,7 @@ fun LoginScreen(
                     .fillMaxWidth()
                     .height(50.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = ButtonTeal,
+                    containerColor = LightTeal,
                     contentColor = PrimaryTeal
                 ),
                 shape = RoundedCornerShape(12.dp),

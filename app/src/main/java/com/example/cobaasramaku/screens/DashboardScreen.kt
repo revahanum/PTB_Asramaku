@@ -16,13 +16,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cobaasramaku.R
 import com.example.cobaasramaku.navigation.Screen
 import com.example.cobaasramaku.ui.theme.BackgroundColor
+import com.example.cobaasramaku.ui.theme.LightTeal
 import com.example.cobaasramaku.ui.theme.PrimaryTeal
-import com.example.cobaasramaku.ui.theme.ButtonTeal
 
 @OptIn (ExperimentalMaterial3Api::class)
 @Composable
@@ -39,14 +40,14 @@ fun DashboardScreen() {
                             painter = painterResource(id = R.drawable.logo),
                             contentDescription = "Logo Asramaku",
                             modifier = Modifier
-                                .size(40.dp)
+                                .size(65.dp)
                                 .clip(CircleShape)
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = "ASRAMAKU",
                             color = PrimaryTeal,
-                            fontSize = 20.sp,
+                            fontSize = 30.sp,
                             fontWeight = FontWeight.Bold
                         )
                     }
@@ -57,7 +58,7 @@ fun DashboardScreen() {
                             imageVector = Icons.Filled.AccountCircle,
                             contentDescription = "Profile",
                             tint = PrimaryTeal,
-                            modifier = Modifier.size(32.dp)
+                            modifier = Modifier.size(40.dp)
                         )
                     }
                 },
@@ -105,18 +106,19 @@ fun ModuleButton(
         onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
-            .height(80.dp),
+            .height(100.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = ButtonTeal,
+            containerColor = LightTeal,
             contentColor = PrimaryTeal
         ),
         shape = RoundedCornerShape(16.dp)
     ){
         Text(
             text = text,
-            fontSize = 16.sp,
+            fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
-            lineHeight = 22.sp
+            lineHeight = 22.sp,
+            textAlign = TextAlign.Center
         )
     }
 }

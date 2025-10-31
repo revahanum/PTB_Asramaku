@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.Color
 val BackgroundColor = Color(0xFFFFEED1)
 val PrimaryTeal = Color(0xFF2E666E)
 val LightTeal = Color(0xFF99CAC4)
-val ButtonTeal = Color(0xFF7DBBB8)
+val DarkYellow = Color(0xFFF6D1A4)
 
 
 private val DarkColorScheme = darkColorScheme(
@@ -28,7 +28,7 @@ private val DarkColorScheme = darkColorScheme(
 private val LightColorScheme = lightColorScheme(
     primary = PrimaryTeal,
     secondary = LightTeal,
-    tertiary = ButtonTeal,
+    tertiary = DarkYellow,
     background = BackgroundColor,
     surface = Color.White,
     onPrimary = Color.White,

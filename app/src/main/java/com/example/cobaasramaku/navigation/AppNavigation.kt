@@ -8,12 +8,14 @@ import com.example.cobaasramaku.screens.DashboardScreen
 import com.example.cobaasramaku.screens.auth.LandingScreen
 import com.example.cobaasramaku.screens.auth.LoginScreen
 import com.example.cobaasramaku.screens.SplashScreen
+import com.example.cobaasramaku.screens.auth.LoginOrSignUpScreen
 import com.example.cobaasramaku.screens.auth.SignUpScreen
 
 
 sealed class Screen(val route: String) {
     object Splash : Screen("splash")
     object Landing : Screen("landing")
+    object LoginOrSignUp : Screen("login_Or_SignUp")
     object Login : Screen("login")
     object SignUp : Screen("signup")
     object Dashboard : Screen("dashboard")
@@ -39,6 +41,14 @@ fun AppNavigation() {
 
         composable(Screen.Landing.route){
             LandingScreen(
+                onNavigateToLoginOrSignUp = {
+                    navController.navigate(Screen.LoginOrSignUp.route)
+                }
+            )
+        }
+
+        composable(Screen.LoginOrSignUp.route){
+            LoginOrSignUpScreen(
                 onNavigateToLogin = {
                     navController.navigate(Screen.Login.route)
                 },
